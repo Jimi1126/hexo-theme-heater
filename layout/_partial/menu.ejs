@@ -1,0 +1,41 @@
+<%
+const columns = new Set();
+const years = new Set();
+const yearCount = {};
+site.posts.sort('date').reverse().forEach(function(post){
+  var year = post.date.year();
+  if (years.has(year)) return yearCount[year]++;
+  years.add(year);
+  yearCount[year] = 1;
+});
+%>
+<div class="text-sm sm:text-base lg:text-lg text-white w-full h-full overflow-y-auto">
+  <div class="flex flex-col items-center menu-list">
+    <a class="w-full p-2 grid grid-cols-5 items-center text-center cursor-pointer hover:bg-gray-800 transition duration-500 active:bg-green-700" path="/"><i class="fas fa-home"></i><div class="col-start-2 col-end-5">首页</div></a>
+    <a class="w-full p-2 grid grid-cols-5 items-center text-center cursor-pointer hover:bg-gray-800 transition duration-500 active:bg-green-700" path="/file"><i class="fas fa-layer-group"></i><div class="col-start-2 col-end-5">归档</div></a>
+    <a class="w-full p-2 grid grid-cols-5 items-center text-center cursor-pointer hover:bg-gray-800 transition duration-500 active:bg-green-700" menu="category"><i class="fas fa-clipboard-list"></i><div class="col-start-2 col-end-5">分类</div><i class="fas fa-angle-down"></i></a>
+    <div id="categoryMenu" class="w-full hidden"><% -%>
+      <% site.categories.map(function(category) { %>
+        <a class="w-full p-2 grid grid-cols-5 items-center text-center cursor-pointer hover:bg-gray-800 transition duration-500 active:bg-green-700" path="<%- category.path %>"><div class="col-start-2 col-end-5"><%- category.name %></div><span class="rounded bg-pink-800"><%- category.length %></span></a><% -%>
+      <% }) %>
+    </div>
+    <a class="w-full p-2 grid grid-cols-5 items-center text-center cursor-pointer hover:bg-gray-800 transition duration-500 active:bg-green-700" menu="column"><i class="fas fa-columns"></i><div class="col-start-2 col-end-5">专栏</div><i class="fas fa-angle-down"></i></a>
+    <div id="columnMenu" class="w-full hidden"><% -%>
+      <% for (let col of columns) { %>
+        <a class="w-full p-2 grid grid-cols-5 items-center text-center cursor-pointer hover:bg-gray-800 transition duration-500 active:bg-green-700" path="<%- col %>"><div class="col-start-2 col-end-5"><%- col %></div><span class="rounded bg-pink-800"><%- columns[col] %></span></a><% -%>
+      <% } %>
+    </div>
+    <a class="w-full p-2 grid grid-cols-5 items-center text-center cursor-pointer hover:bg-gray-800 transition duration-500 active:bg-green-700" menu="tag"><i class="fas fa-tags"></i><div class="col-start-2 col-end-5">标签</div><i class="fas fa-angle-down"></i></a>
+    <div id="tagMenu" class="w-full hidden"><% -%>
+      <% site.tags.map(function (tag) { %>
+        <a class="w-full p-2 grid grid-cols-5 items-center text-center cursor-pointer hover:bg-gray-800 transition duration-500 active:bg-green-700" path="<%- tag.path %>"><div class="col-start-2 col-end-5"><%- tag.name %></div><span class="rounded bg-pink-800"><%- tag.length %></span></a><% -%>
+      <% }) %>
+    </div>
+    <a class="w-full p-2 grid grid-cols-5 items-center text-center cursor-pointer hover:bg-gray-800 transition duration-500 active:bg-green-700" menu="year"><i class="fas fa-calendar-alt"></i><div class="col-start-2 col-end-5">年份</div><i class="fas fa-angle-down"></i></a>
+    <div id="yearMenu" class="w-full hidden"><% -%>
+      <% for (let year of years) { %>
+        <a class="w-full p-2 grid grid-cols-5 items-center text-center cursor-pointer hover:bg-gray-800 transition duration-500 active:bg-green-700" path="<%- year %>"><div class="col-start-2 col-end-5"><%- year %></div><span class="rounded bg-pink-800"><%- yearCount[year] %></span></a><% -%>
+      <% } %>
+    </div>
+  </div>
+</div>

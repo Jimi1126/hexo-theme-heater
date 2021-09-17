@@ -1,0 +1,39 @@
+<%
+  const postSet = {};
+  page.posts.each(function (post) {
+    const theDate = date(post.date, 'yyyy')
+    postSet[theDate] = postSet[theDate] || []
+    postSet[theDate].push(post)
+  })
+%> 
+<%- partial('header', null, {cache: true}) %>
+<div class="p-4 space-y-4">
+<% Object.keys(postSet).sort((a, b)=> b - a).forEach((year)=> { %>
+  <div>
+    <p class="text-lg font-bold"><%= year %></p>
+    <div class="divide-y">
+    <% postSet[year].sort((a, b)=> a.date.isBefore(b.date)).forEach((post)=> { %>
+      <div class="grid gap-4 p-2" style="grid-template-columns: auto 9rem;">
+        <span class="truncate underline">
+          <% if (post.link === '') { %>
+          <a href="<%= url_for(post.path) %>" target="_self">
+          <% } else { %>
+          <a href="<%= post.link %>" target="_blank">
+          <% } %>
+          <%= post.title %>
+          </a>
+        </span>
+        <div class="flex justify-center divide-x">
+          <% post.categories.map(function(category, i){ %>
+            <% if(!i) { %> 
+            <span class="pr-1"><%= category.name %></span>
+            <% } %> 
+          <% }) %>
+          <span class="pl-1"><%= full_date(post.date, 'YYYY-MM-DD') %></span>
+        </div>
+      </div>
+    <% }) %>
+    </div>
+  </div>
+<% }) %>
+</div>

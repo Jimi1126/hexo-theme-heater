@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <%- partial('head', null, {cache: true}) %>
+  <body>
+    <div class="flex flex-col items-center">
+      <%- partial('_partial/tool', null, {cache: true}) %>
+      <div id="container" class="container flex-auto" style="min-height: calc(100vh - 6rem);">
+        <%- body %> 
+      </div>
+      <%- partial('footer', null, {cache: true}) %>
+    </div>
+  </body>
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?94d58b73336d471470a480cea85af875";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  <%- js('js/main.bundle.js') -%>
+</html>

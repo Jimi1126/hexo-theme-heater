@@ -1,0 +1,8 @@
+# HTML head
+head:
+  favicon: /image/favicon.svg
+  high_res_favicon: /image/favicon.svg
+  apple_touch_icon: /image/favicon.svg
+  keywords: hexo, blog
+
+github: //github.com/PGambler

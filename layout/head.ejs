@@ -1,0 +1,67 @@
+<%
+var pageTitle = page.title || '';
+if (is_home()) pageTitle = __('global.index');
+if (is_archive()) pageTitle = __('global.archives');
+if (is_tag()) pageTitle = __('global.tag') + ': ' + page.tag;
+if (is_category()) pageTitle = __('global.category') + ': ' + page.category;
+if (is_year()) pageTitle = page.year;
+if (page.path === 'search.html') pageTitle = __('search.text');
+pageTitle += ' - ' + config.title;
+%>
+<head>
+  
+  <!-- Favicons -->
+  <link rel="icon shortcut" type="image/ico" href="<%= url_for(theme.head.favicon) %>">
+  <link rel="icon" sizes="192x192" href="<%= url_for(theme.head.high_res_favicon) %>">
+  <link rel="apple-touch-icon" href="<%= url_for(theme.head.apple_touch_icon) %>">
+
+  <!-- Meta & Info -->
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#fff">
+  <meta name="author" content="<%= config.author %>">
+  <% if(page.description) { %>
+  <meta name="description" itemprop="description" content="<%= page.description %>">
+  <% } else if(page.excerpt){ %>
+  <meta name="description" content="<%= strip_html(page.excerpt).replace(/^s*/, '').replace(/s*$/, '') %>">
+  <% } else if (config.description){ %>
+  <meta name="description" content="<%= config.description %>">
+  <% } %>
+  <meta name="keywords" content="<%= theme.head.keywords %><% if(page.tags && page.tags.each) { page.tags.each(function(tag) { %><%- ',' + tag.name %><% })} %>">
+
+  <!--iOS -->
+  <meta name="apple-mobile-web-app-title" content="<%= config.title %>">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="480">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <!-- The Open Graph protocol -->
+  <meta property="og:url" content="<%= config.url %>">
+  <meta property="og:type" content="blog">
+  <meta property="og:title" content="<% if (pageTitle) { %><%= pageTitle %> | <% } %><%= config.title %>">
+  <meta property="og:image" content="<%= theme.head.high_res_favicon %>" />
+  <% if(page.description) { %>
+  <meta property="og:description" content="<%= page.description %>">
+  <% } else if(page.excerpt){ %>
+  <meta property="og:description" content="<%= strip_html(page.excerpt).replace(/^s*/, '').replace(/s*$/, '') %>">
+  <% } else if (config.description){ %>
+  <meta property="og:description" content="<%= config.description %>">
+  <% } %>
+  <% if(page.tags && page.tags.each) { page.tags.each(function(tag){ %>
+  <meta property="og:article:tag" content="<%= tag.name %>">
+  <% })} %>
+  <title><%= config.title %></title>
+  <%- css('css/index.min.css') %>
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" rel="stylesheet">
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.4.x/dist/typography.min.css"
+  />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <script src="https://kit.fontawesome.com/880bc416b5.js" crossorigin="anonymous"></script>
+</head>

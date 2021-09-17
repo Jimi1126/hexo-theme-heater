@@ -1,0 +1,24 @@
+{
+  "name": "hexo-theme-heater",
+  "version": "1.0.0",
+  "description": "hexo theme",
+  "main": "index.js",
+  "author": "PGambler",
+  "license": "MIT",
+  "scripts": {
+    "build-js": "parcel build source/js/main.js -d source/js --out-file main.bundle.js --no-cache",
+    "build-css": "postcss source/css/index.css -o source/css/index.min.css"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.3.4",
+    "cheerio": "^1.0.0-rc.10",
+    "cssnano": "^5.0.8",
+    "postcss": "^8.2.15",
+    "postcss-import": "^14.0.2",
+    "tailwindcss": "^2.2.14"
+  },
+  "dependencies": {
+    "jquery": "^3.6.0",
+    "typeit": "^8.0.2"
+  }
+}
