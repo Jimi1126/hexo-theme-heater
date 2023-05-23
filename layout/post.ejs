@@ -1,44 +1,10 @@
-<% reAssemblePost(page) %> 
+
 <div class="antialiased text-gray-900">
   <div class="px-4 py-4 my-6 max-w-3xl mx-auto shadow-lg sm:px-6 sm:py-12 lg:max-w-4xl lg:py-16 lg:px-8 xl:max-w-6xl">
-    <div class="flex flex-col items-center mb-4 mx-auto border-b border-gray-500">
-      <span class="text-4xl break-all text-gray-500"><%- page.title %></span>
-      <span class="grid grid-cols-2 gap-x-2 py-4 text-sm text-gray-500">
-        <span class="flex items-center">
-          <span>浏览数：<%- '20K' %></span>
-        </span>
-        <span class="flex items-center">
-          <i class="fas fa-calendar-alt"></i>
-          <span class="pl-1"><%- date(page.date, "YYYY-MM-DD") %></span>
-        </span>
-      </span>
-    </div>
-    <article class="prose prose-indigo prose-sm sm:prose lg:prose-lg xl:prose-xl 2xl:prose-2xl mx-auto">
-      <%- page.content %>
-    </article>
-    <div class="grid grid-cols-2 gap-x-2 p-3 m-3 mx-auto border-t border-gray-500">
-      <span class="flex flex-col">
-        <% if(page.prev) { %> 
-        <a class="flex items-center" href="<%= url_for(page.prev.path)%>">
-          <i class="fas fa-angle-left"></i>
-          <span class="pl-1">上一篇</span>
-        </a>
-        <a class="truncate" href="<%= url_for(page.prev.path)%>"><%- page.prev.title %></a>
-        <% } %> 
-      </span>
-      <span class="w-full flex flex-col justify-self-end">
-        <% if(page.next) { %> 
-        <a class="flex justify-end items-center" href="<%= url_for(page.next.path)%>">
-          <span class="pr-1">下一篇</span>
-          <i class="fas fa-angle-right"></i>
-        </a>
-        <a class="text-right truncate" href="<%= url_for(page.next.path)%>"><%- page.next.title %></a>
-        <% } %> 
-      </span>
-    </div>
-  </div>
-  <div class="toc-wrap hidden text-xs sm:text-sm lg:text-base xl:text-lg">
-    <p class="p-3 pb-1 mb-2 border-b border-solid border-gray-800">目录</p>
-    <%- toc(page.content) %>
+    <% if (/about/.test(path)) { %> 
+      <%- partial('_partial/about', null, {cache: true}) %>
+    <% } else { %> 
+      <%- partial('_partial/post') %>
+    <% } %>
   </div>
 </div>

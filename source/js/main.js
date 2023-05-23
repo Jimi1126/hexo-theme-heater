@@ -74,7 +74,7 @@ const methods = Object.freeze({
 
 const onMounted = () => {
   /* 事件绑定 */
-  $('#myUsage').length && new TypeIt('#myUsage').go()
+  $('#cool').length && new TypeIt('#cool').go()
   $('#back2top').on('click', state.elevator.elevate)
   $('#container').on(
     'scroll',

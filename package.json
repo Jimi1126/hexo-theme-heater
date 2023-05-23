@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build-js": "parcel build source/js/main.js -d source/js --out-file main.bundle.js --no-cache",
-    "build-css": "postcss source/css/index.css -o source/css/index.min.css"
+    "build-css": "cd source/css & postcss index.css -o index.min.css -w"
   },
   "devDependencies": {
     "autoprefixer": "^10.3.4",

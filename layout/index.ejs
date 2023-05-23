@@ -6,7 +6,7 @@
     postSet[theDate].push(post)
   })
 %> 
-<%- partial('header', null, {cache: true}) %>
+<%- partial('header', {cool: null}, {cache: true}) %>
 <div class="p-4 space-y-4">
 <% Object.keys(postSet).sort((a, b)=> b - a).forEach((year)=> { %>
   <div>
@@ -23,7 +23,7 @@
           <%= post.title %>
           </a>
         </span>
-        <div class="flex justify-center divide-x">
+        <div class="flex justify-center divide-x divide-gray-400">
           <% post.categories.map(function(category, i){ %>
             <% if(!i) { %> 
             <span class="pr-1"><%= category.name %></span>

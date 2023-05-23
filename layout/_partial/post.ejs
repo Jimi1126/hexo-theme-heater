@@ -1,0 +1,40 @@
+<% reAssemblePost(page) %> 
+<div class="flex flex-col items-center mb-4 mx-auto border-b border-gray-500">
+  <span class="text-4xl break-all text-gray-600"><%- page.title %></span>
+  <span class="grid grid-cols-2 items-end gap-1 w-full pt-4 pb-2 text-xs text-gray-400">
+    <span>
+      <span>浏览数：<%- '-' %></span>
+    </span>
+    <div class="justify-self-end grid gap-1">
+      <span>更新于：<%- date(page.updated, "YYYY-MM-DD HH:mm") %></span>
+      <span>创建于：<%- date(page.date, "YYYY-MM-DD HH:mm") %></span>
+    </div>
+  </span>
+</div>
+<article class="prose prose-indigo prose-sm sm:prose lg:prose-lg xl:prose-xl 2xl:prose-2xl mx-auto">
+  <%- page.content %>
+</article>
+<div class="grid grid-cols-2 gap-x-2 p-3 m-3 mx-auto border-t border-gray-500">
+  <span class="flex flex-col">
+    <% if(page.prev) { %> 
+    <a class="flex items-center" href="<%= url_for(page.prev.path)%>">
+      <i class="fas fa-angle-left"></i>
+      <span class="pl-1">上一篇</span>
+    </a>
+    <a class="truncate" href="<%= url_for(page.prev.path)%>"><%- page.prev.title %></a>
+    <% } %> 
+  </span>
+  <span class="w-full flex flex-col justify-self-end">
+    <% if(page.next) { %> 
+    <a class="flex justify-end items-center" href="<%= url_for(page.next.path)%>">
+      <span class="pr-1">下一篇</span>
+      <i class="fas fa-angle-right"></i>
+    </a>
+    <a class="text-right truncate" href="<%= url_for(page.next.path)%>"><%- page.next.title %></a>
+    <% } %> 
+  </span>
+</div>
+<div class="toc-wrap hidden text-xs sm:text-sm lg:text-base xl:text-lg">
+  <p class="p-3 pb-1 mb-2 border-b border-solid border-gray-800">目录</p>
+  <%- toc(page.content) %>
+</div>
